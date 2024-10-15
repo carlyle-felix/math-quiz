@@ -22,10 +22,10 @@ int main(void) {
     
     for (round = 0; round < n; round++) {
         op = rand() % 4;
+        num1 = rand() % digits;
+        num2 = rand() % digits;
         printf("op: %d\n", op);   // debugging
         if (op == 0) {                                              // Addition
-            num1 = rand() % digits;
-            num2 = rand() % digits;
             printf("%d + %d =   ", num1, num2);
             scanf("%d", &ans);
             if (ans == num1 + num2){
