@@ -24,7 +24,6 @@ int main(void) {
         op = rand() % 4;
         num1 = rand() % digits;
         num2 = rand() % digits;
-        printf("op: %d\n", op);   // debugging
         if (op == 0) {                                              // Addition
             printf("%d + %d =   ", num1, num2);
             scanf("%d", &ans);
@@ -51,7 +50,7 @@ int main(void) {
                 score++;
             } else 
                 printf("Incorrect, don't give up!\n");
-        } else if (op == 3) {                                        // Division: Make num1 % num2 == 0 (causing floating point exception)
+        } else if (op == 3) {                                        // Division: Make num1 % num2 == 0
             for (i = 0; num1 % num2 != 0 && i < 5; i++) {
                 num1 = rand() % digits;
                 num2 = rand() % digits;
