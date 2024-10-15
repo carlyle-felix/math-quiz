@@ -52,25 +52,20 @@ int main(void) {
             } else 
                 printf("Incorrect, don't give up!\n");
         } else if (op == 3) {                                        // Division: Make num1 % num2 == 0 (causing floating point exception)
-            if (num1 < num2) {
-                temp = num1;
-                num1 = num2;
-                num2 = temp;
-            }
-            
-            if ( num1 %  num2 != 0) {
-                for (i = 0; i < 5; i++) {
-                    num1 = rand() % digits;
-                    num2 = rand() % digits;
+            for (i = 0; num1 % num2 != 0 && i < 5; i++) {
+                num1 = rand() % digits;
+                num2 = rand() % digits;
 
-                    if (num1 < num2) {
-                        temp = num1;
-                        num1 = num2;
-                        num2 = temp;
-                    } 
-                    if ( num1 %  num2 == 0)
-                        break;
+                if (num1 < num2) {
+                    temp = num1;
+                    num1 = num2;
+                    num2 = temp;
                 }
+            }
+
+            if ( i == 5) {
+                round--;
+                continue;
             }
 
             if ( num1 %  num2 != 0) {
