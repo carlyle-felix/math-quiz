@@ -1,35 +1,35 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 char operator(int operator);
 void grade(float total);
-bool evaluate(int num1, int num2, int operator);
+int calc(int num1, int num2, int operator);
 
 int main(void) {
-    int num1, num2, digits, lvl, op, round, n, score = 0, temp, i, result;
+    int num1, num2, quiz_ans, user_ans, digits = 0, lvl, sym, round, n, score = 0, temp, i, x;
 
     srand((unsigned) time(NULL));
 
-    printf("Select difficulty [(1) operands < 10 or (2) operands < 100]:  ");
+    printf("difficulty:\n(1) Operands < 10\n(2) Operands < 100\n(3) One operand is x\nSelect:  ");
     scanf("%d", &lvl);
+
     if (lvl == 1) {
         digits = 9;
-    } else if (lvl == 2) {
+    } else if (lvl == 2 || lvl == 3) {
         digits = 99;
-    }
+    } 
     printf("Enter number of rounds: ");
     scanf("%d", &n);
 
     for (round = 0; round < n; round++) {
-        op = rand() % 4;
+        sym = rand() % 4;
         num1 = rand() % digits;
         num2 = rand() % digits;
         
-        if (op == 0 && lvl == 2)                                       // Multiplication: for lvl 2, Make num2 a single digit
+        if (sym == 0 && lvl == 2 || sym == 0 && lvl == 3)                                       // Multiplication: for lvl 2, Make num2 a single digit
             num2 = num2 % 10;
-        else if (op == 1) {                                            // Division: Make num1 % num2 == 0
+        else if (sym == 1) {                                                                   // Division: Make num1 % num2 == 0
             for (i = 0; num1 % num2 != 0 && i < 5; i++) {
                 num1 = rand() % digits;
                 num2 = rand() % digits;
@@ -46,11 +46,35 @@ int main(void) {
                 continue;
             }
         }
-        printf("%d %c %d = ", num1, operator(op), num2);
-        result = evaluate(num1, num2, op);
-        if (result)
+
+        if (lvl == 3) {
+            quiz_ans = calc(num1, num2, sym);
+            
+            if (rand() % 2 == 0) {
+                printf("\n%d.  x %c %d = %d\n", round + 1, operator(sym), num2, quiz_ans);
+                printf("    x = ");
+                scanf("%d", &num1);
+            } else {
+                num2 = 'x';    
+                printf("\n%d.  %d %c x = %d\n", round + 1, num1, operator(sym), quiz_ans);
+                printf("    x = ");
+                scanf("%d", &num2);
+            }
+            user_ans = calc(num1, num2, sym);
+
+        } else {
+            printf("\n%d.  %d %c %d = ", round + 1, num1, operator(sym), num2);
+            scanf("%d", &user_ans);
+            quiz_ans = calc(num1, num2, sym);
+        }
+
+        if (quiz_ans == user_ans) {
+            printf("    Correct!\n");
             score++;
+        } else
+            printf("    Incorrect, don't give up!\n");
     }        
+
     printf("\nYou got %d out of %d.\n", score, n);
     grade((float) score / n * 100);
 }
@@ -78,32 +102,17 @@ void grade(float total) {
     }
 }
 
-bool evaluate(int num1, int num2, int operator) {
-    
-    int quiz_ans, user_ans;
-    
+int calc(int num1, int num2, int operator) {
+
     switch (operator) {
     case 0:
-        quiz_ans = num1 * num2;
-        break;
+        return num1 * num2;
     case 1:
-        quiz_ans = num1 / num2;
-        break;
+        return num1 / num2;
     case 2:
-        quiz_ans = num1 + num2;
-        break;
+        return num1 + num2;
     case 3:
-        quiz_ans = num1 - num2;
-        break;
-    }
-    
-    scanf("%d", &user_ans);
-    if (quiz_ans == user_ans) {
-        printf("Correct!\n");
-        return true;
-    } else {
-        printf("Incorrect, don't give up!\n");
-        return false;
+        return num1 - num2;
     }
 }
 
@@ -111,7 +120,7 @@ char operator(int operator) {
 
     switch (operator) {
     case 0:
-        return 'x';
+        return '*';
     case 1:
         return '/';
     case 2:
