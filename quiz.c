@@ -17,7 +17,7 @@ int main(void) {
     printf("difficulty:\n(1) Operands < 10\n(2) Operands < 100\n(3) One operand is x and operands < 10\n(4) One operator is x, operand unkown and operands < 100\nSelect:  ");
     scanf("%d", &lvl);
 
-    if (lvl == 1 || lvl == 3) {                                                                 // digits should never be zero, add 1 when calling rand()
+    if (lvl == 1 || lvl == 3) {                                                                 // Numbers should never be zero, add 1 when calling rand()
         digits = 8;
     } else if (lvl == 2 || lvl == 4) {
         digits = 98;
