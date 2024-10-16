@@ -108,6 +108,8 @@ int main(void) {
 
     printf("\nYou got %d out of %d.\n", score, n);
     grade((float) score / n * 100);
+
+    return 0;
 }
 
 void grade(float total) {
