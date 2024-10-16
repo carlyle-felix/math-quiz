@@ -64,8 +64,7 @@ int main(void) {
                     printf("\n%d.  x %c %d = %d\n", round + 1, operator(sym), num2, quiz_ans);
                     printf("    x = ");
                     scanf("%d", &num1);
-                } else {
-                    num2 = 'x';    
+                } else {   
                     printf("\n%d.  %d %c x = %d\n", round + 1, num1, operator(sym), quiz_ans);
                     printf("    x = ");
                     scanf("%d", &num2);
@@ -82,7 +81,6 @@ int main(void) {
                     printf("    Operator: ");
                     sym = (int) getchar();
                 } else {
-                    num2 = 'x';    
                     printf("\n%d.  %d ? x = %d\n", round + 1, num1, quiz_ans);
                     printf("    Operator: ");
                     sym = (int) getchar();
