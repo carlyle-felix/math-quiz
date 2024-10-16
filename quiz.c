@@ -67,11 +67,6 @@ int main(void) {
                 continue;
             }
 
-            if ( num1 %  num2 != 0) {
-                round--;
-                continue;
-            }
-
             printf("%d / %d =   ", num1, num2);
             scanf("%d", &ans);
             if (ans == num1 / num2){
