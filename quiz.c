@@ -18,7 +18,11 @@ int main(void) {
         digits = 9;
     } else if (lvl == 2 || lvl == 3) {
         digits = 99;
-    } 
+    } else {
+        printf("We're not there yet.\n");
+        return 0;
+    }
+
     printf("Enter number of rounds: ");
     scanf("%d", &n);
 
