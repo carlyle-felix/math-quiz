@@ -7,7 +7,6 @@
 #include <ctype.h>
 
 char operator(int operator);
-void grade(float total);
 int calc(int num1, int num2, int operator);
 char input(void);
 int power(int base, int exp);
@@ -117,7 +116,6 @@ int main(void) {
             }
         }        
         printf("\nYou got %d out of %d.\n", score, n);
-        grade((float) score / n * 100);
 
         while((choice = toupper(getchar())) != 'Y') {
 
@@ -129,29 +127,6 @@ int main(void) {
         }
     }
     return 0;
-}
-
-void grade(float total) {
-
-    switch ((int) total / 10) {
-    case 10:
-        printf("Grade: Perfect, A!\n");
-        break;
-    case 9:
-        printf("Grade: A\n");
-        break;
-    case 8:
-        printf("Grade: B\n");
-        break;
-    case 7:
-        printf("Grade: C\n");
-        break;
-    case 6:
-        printf("Grade: D\n");
-        break;
-    default:
-        printf("Grade: F\n");
-    }
 }
 
 int calc(int num1, int num2, int operator) {                                                    // ASCII conversions
