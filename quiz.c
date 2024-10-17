@@ -13,13 +13,13 @@ char input(void);
 int power(int base, int exp);
 
 int main(void) {
-    int num1, num2, quiz_ans, user_ans, digits = 0, lvl, sym, round, n, score = 0, temp, i, x;
+    int num1, num2, quiz_ans, user_ans, digits = 0, lvl, sym, round, n, score, temp, i, x;
     char choice = 'Y';
 
     srand((unsigned) time(NULL));
 
     while(choice == 'Y') {
-    
+        
         printf("\ndifficulty:\n(1) Operands < 10\n(2) Operands < 100\n(3) One operand is x and operands < 10\n(4) One operator is x, operand unkown and operands < 100\n(5) Squares, base < 10\nSelect:  ");
         scanf("%d", &lvl);
         
@@ -36,6 +36,7 @@ int main(void) {
         printf("Enter number of rounds: ");
         scanf("%d", &n);
 
+        score = 0;
         for (round = 0; round < n; round++) {
             num1 = rand() % digits + 1;
             if (lvl == 5){
