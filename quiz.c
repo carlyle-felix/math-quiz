@@ -9,6 +9,7 @@
 char operator(int operator);
 void grade(float total);
 int calc(int num1, int num2, int operator);
+char input(void);
 
 int main(void) {
     int num1, num2, quiz_ans, user_ans, digits = 0, lvl, sym, round, n, score = 0, temp, i, x;
@@ -39,7 +40,7 @@ int main(void) {
             num2 = rand() % digits + 1;
 
             // operator specifics
-            if (sym == 0)                                                                // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
+            if (sym == 0)                                                                          // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
                 num2 %= 10;
             else if (sym == 1) {                                                                   // Division: Make num1 % num2 == 0
                 for (i = 0; num1 % num2 != 0 && i < 5; i++) {
@@ -61,7 +62,6 @@ int main(void) {
             // level specifics
             if (lvl > 2) {
                 quiz_ans = calc(num1, num2, sym);
-                getchar();                                                                          // Dispose '\n'
                 switch (lvl) {
                 case 3:
                     if (rand() % 2 == 0) {
@@ -81,13 +81,12 @@ int main(void) {
                         printf("\n%d.  x ? %d = %d\n", round + 1, num2, quiz_ans);
                         printf("    x = ");
                         scanf("%d", &num1);
-                        getchar();                                                                  // Dispose '\n'
                         printf("    Operator: ");
-                        sym = (int) getchar();
+                        sym = (int) input();
                     } else {
                         printf("\n%d.  %d ? x = %d\n", round + 1, num1, quiz_ans);
                         printf("    Operator: ");
-                        sym = (int) getchar();
+                        sym = (int) input();
                         printf("    x = ");
                         scanf("%d", &num2);
                     }
@@ -170,5 +169,12 @@ char operator(int operator) {
         return '+';
     case 3:
         return '-';
+    }
+}
+
+char input(void) {
+    
+    while (getchar() == '\n') {
+        return getchar();
     }
 }
