@@ -13,7 +13,7 @@ char input(void);
 int power(int base, int exp);
 
 int main(void) {
-    int num1, num2, quiz_ans, user_ans, digits = 0, lvl, sym, round, n, score, temp, i, x;
+    int num1, num2, quiz_ans, user_ans, digits = 0, lvl, sym, round, n, score, i, x;
     char choice = 'Y';
 
     srand((unsigned) time(NULL));
@@ -37,6 +37,7 @@ int main(void) {
         scanf("%d", &n);
 
         score = 0;
+        // start quiz
         for (round = 0; round < n; round++) {
             num1 = rand() % digits + 1;
             if (lvl == 5){
@@ -56,7 +57,7 @@ int main(void) {
                         num2 = rand() % digits + 1;
                         
                         if (num1 < num2) {
-                            temp = num1;
+                            int temp = num1;
                             num1 = num2;
                             num2 = temp;
                         }
@@ -123,7 +124,7 @@ int main(void) {
             if (choice == 'N') {
                 break;
             } else {
-                printf("\nOptions: (Y) to start a new quiz. (N) to quit.\nSelect: ");
+                printf("\nStart new quiz? (Y/N)\nSelect: ");
             }
         }
     }
