@@ -39,8 +39,8 @@ int main(void) {
             num2 = rand() % digits + 1;
 
             // operator specifics
-            if (sym == 0 && lvl > 1)                                                                // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
-                num2 = num2 % 10;
+            if (sym == 0)                                                                // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
+                num2 %= 10;
             else if (sym == 1) {                                                                   // Division: Make num1 % num2 == 0
                 for (i = 0; num1 % num2 != 0 && i < 5; i++) {
                     num1 = rand() % digits + 1;
@@ -116,7 +116,7 @@ int main(void) {
             if (choice == 'N')
                 break;
             else
-                printf("Options: (Y) to start a new quiz. (N) to quit.\nSelect: ");
+                printf("\nOptions: (Y) to start a new quiz. (N) to quit.\nSelect: ");
         }
     }
     return 0;
