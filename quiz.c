@@ -72,35 +72,35 @@ int main(void) {
                     quiz_ans = calc(num1, num2, sym);
                     
                     switch (lvl) {
-                    case 3:
-                        if (rand() % 2 == 0) {
-                            printf("\n%d.  x %c %d = %d\n", round + 1, operator(sym), num2, quiz_ans);
-                            printf("    x = ");
-                            scanf("%d", &num1);
-                        } else {   
-                            printf("\n%d.  %d %c x = %d\n", round + 1, num1, operator(sym), quiz_ans);
-                            printf("    x = ");
-                            scanf("%d", &num2);
-                        }
-                        user_ans = calc(num1, num2, sym);
-                        break;
+                        case 3:
+                            if (rand() % 2 == 0) {
+                                printf("\n%d.  x %c %d = %d\n", round + 1, operator(sym), num2, quiz_ans);
+                                printf("    x = ");
+                                scanf("%d", &num1);
+                            } else {   
+                                printf("\n%d.  %d %c x = %d\n", round + 1, num1, operator(sym), quiz_ans);
+                                printf("    x = ");
+                                scanf("%d", &num2);
+                            }
+                            user_ans = calc(num1, num2, sym);
+                            break;
 
-                    case 4:
-                        if (rand() % 2 == 0) {
-                            printf("\n%d.  x ? %d = %d\n", round + 1, num2, quiz_ans);
-                            printf("    x = ");
-                            scanf("%d", &num1);
-                            printf("    Operator: ");
-                            sym = (int) input();
-                        } else {
-                            printf("\n%d.  %d ? x = %d\n", round + 1, num1, quiz_ans);
-                            printf("    Operator: ");
-                            sym = (int) input();
-                            printf("    x = ");
-                            scanf("%d", &num2);
-                        }
-                        user_ans = calc(num1, num2, sym);
-                        break;
+                        case 4:
+                            if (rand() % 2 == 0) {
+                                printf("\n%d.  x ? %d = %d\n", round + 1, num2, quiz_ans);
+                                printf("    x = ");
+                                scanf("%d", &num1);
+                                printf("    Operator: ");
+                                sym = (int) input();
+                            } else {
+                                printf("\n%d.  %d ? x = %d\n", round + 1, num1, quiz_ans);
+                                printf("    Operator: ");
+                                sym = (int) input();
+                                printf("    x = ");
+                                scanf("%d", &num2);
+                            }
+                            user_ans = calc(num1, num2, sym);
+                            break;
                     }       
                 } else {
                     printf("\n%d.  %d %c %d = ", round + 1, num1, operator(sym), num2);
@@ -132,14 +132,10 @@ int main(void) {
 int calc(int num1, int num2, int operator) {                                                    // ASCII conversions
 
     switch (operator) {
-    case 0: case 42:
-        return num1 * num2;
-    case 1: case 47:
-        return num1 / num2;
-    case 2: case 43:
-        return num1 + num2;
-    case 3: case 45:
-        return num1 - num2;
+        case 0: case 42:    return num1 * num2;
+        case 1: case 47:    return num1 / num2;
+        case 2: case 43:    return num1 + num2;
+        case 3: case 45:    return num1 - num2;
     }
 }
 
@@ -157,14 +153,10 @@ int power(int base, int exp) {
 char operator(int operator) {
 
     switch (operator) {
-    case 0:
-        return '*';
-    case 1:
-        return '/';
-    case 2:
-        return '+';
-    case 3:
-        return '-';
+        case 0: return '*';
+        case 1: return '/';
+        case 2: return '+';
+        case 3: return '-';
     }
 }
 
