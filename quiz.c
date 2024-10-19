@@ -1,5 +1,5 @@
- // Author: Carlyle Felix
- // This math quiz was written with the basics I've learned to date.
+// Author: Carlyle Felix
+// This math quiz was written with the basics I've learned to date.
 
 #include <stdio.h>
 #include <time.h>
@@ -18,14 +18,17 @@ int num1, num2, lvl, symbol, quiz_ans, user_ans;
 
 int main(void) {
     int digits = 0, round, n, score, i, x;
-    char choice = 'Y';
+    char choice = 'R';
 
     srand((unsigned) time(NULL));
 
-    while(choice == 'Y') {
+    while(choice == 'R' || choice == 'N') {
         
-        printf("\ndifficulty:\n(1) Operands < 10\n(2) Operands < 100\n(3) One operand is x and operands < 10\n(4) One operator is x, operand unkown and operands < 100\n(5) Squares, base < 10\nSelect:  ");
-        scanf("%d", &lvl);
+        if (choice == 'N') lvl += 1;
+        else {
+            printf("\ndifficulty:\n(1) Operands < 10\n(2) Operands < 100\n(3) One operand is x and operands < 10\n(4) One operator is x, operand unkown and operands < 100\n(5) Squares, base < 10\nSelect:  ");
+            scanf("%d", &lvl);
+        }
         
         // difficulty specifics 
         if (lvl == 1 || lvl == 3 || lvl == 5) {                             // Numbers should never be zero, add 1 when calling rand()
@@ -43,9 +46,11 @@ int main(void) {
         score = 0;
         // start quiz
         for (round = 1; round <= n; round++) {
+            
+            // generate random numbers and operator
             num1 = rand() % digits + 1;
             num2 = rand() % digits + 1;
-            symbol = rand() % 4;                                                // generate random operator
+            symbol = rand() % 4;                                               
             
             // operator specifics  
             if (symbol == 0) {                                                  // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
@@ -67,8 +72,7 @@ int main(void) {
                 }
             }
 
-            interact(round);  
-                 
+            interact(round);       
             if (quiz_ans == user_ans) {
                 printf("    Correct!\n");
                 score++;
@@ -79,12 +83,12 @@ int main(void) {
         printf("\nYou got %d out of %d.\n", score, n);
 
         // restart or quit
-        while((choice = toupper(getchar())) != 'Y') {
+        while((choice = toupper(getchar())) != 'R' && choice != 'N') {
 
-            if (choice == 'N') {
+            if (choice == 'Q') {
                 break;
             } else {
-                printf("\nStart new quiz? (Y/N)\nSelect: ");
+                printf("\nOptions:\n\n(R)estart quiz\n(N)ext difficulty level\n(Q)uit\nSelect: ");
             }
         }
     }
