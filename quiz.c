@@ -8,16 +8,16 @@
 
 // function prototypes
 char operator(int operator);
-int calc();
+int calc(int num1, int num2);
 char input(void);
 int power(int base, int exp);
-void interact(int round);
+int interact(int level, int round, int num1, int num2);
 
 // externel variables
-int num1, num2, lvl, symbol, quiz_ans, user_ans;
+int symbol;
 
 int main(void) {
-    int digits = 0, round, num_rounds, score;
+    int num1, num2, lvl, digits = 0, round, num_rounds, score, quiz_ans, user_ans;
     char choice = 'R';
 
     srand((unsigned) time(NULL));
@@ -30,7 +30,7 @@ int main(void) {
             scanf("%d", &lvl);
         }
         
-        // difficulty specifics 
+        // difficulty digits 
         if (lvl == 1 || lvl == 3 || lvl == 5) {                             // Numbers should never be zero, add 1 when calling rand()
             digits = 8;
         } else if (lvl == 2 || lvl == 4) {
@@ -71,7 +71,8 @@ int main(void) {
                 }
             }
 
-            interact(round);       
+            quiz_ans = lvl < 5 ? calc(num1, num2) : power(num1, 2);
+            user_ans = interact(lvl, round, num1, num2);       
             if (quiz_ans == user_ans) {
                 printf("    Correct!\n");
                 score++;
@@ -95,7 +96,7 @@ int main(void) {
 }
 
  // caclucate answers, use ASCII conversions when operator was given by user
-int calc() {                                                   
+int calc(int num1, int num2) {                                                   
 
     switch (symbol) {
         case 0: case 42:    return num1 * num2;
@@ -132,25 +133,25 @@ char input(void) {
 }
 
 // Print equations and collect user input
-void interact(int round) {
+int interact(int level, int round, int num1, int num2) {
 
-    int method = rand() % 2;
+    int user_ans, method = rand() % 2;
 
     symbol = operator(symbol);
-    quiz_ans = lvl < 5 ? calc() : power(num1, 2);
-    switch(lvl) {
+    
+    switch(level) {
         case 1: case 2:     
             printf("\n%d.  %d %c %d = ", round, num1, symbol, num2);
             scanf("%d", &user_ans);
-            return;
+            return user_ans;
 
         case 3:             
             if (method) {
-                printf("\n%d.  x %c %d = %d\n", round, symbol, num2, calc());
+                printf("\n%d.  x %c %d = %d\n", round, symbol, num2, calc(num1, num2));
                 printf("    x = ");
                 scanf(" %d", &num1);
             } else {
-                printf("\n%d.  %d %c x = %d\n", round, num1, symbol, calc());
+                printf("\n%d.  %d %c x = %d\n", round, num1, symbol, calc(num1, num2));
                 printf("    x = ");
                 scanf(" %d", &num2);
             }
@@ -158,13 +159,13 @@ void interact(int round) {
 
         case 4: 
             if (method) {
-                printf("\n%d.  x ? %d = %d\n", round, num2, calc());
+                printf("\n%d.  x ? %d = %d\n", round, num2, calc(num1, num2));
                 printf("    x = ");
                 scanf(" %d", &num1);
                 printf("    Operator: ");
                 symbol = (int) input();
             } else { 
-                printf("\n%d.  %d ? x = %d\n", round, num1, calc());
+                printf("\n%d.  %d ? x = %d\n", round, num1, calc(num1, num2));
                 printf("    Operator: ");
                 symbol = (int) input();
                 printf("    x = ");
@@ -175,7 +176,7 @@ void interact(int round) {
         case 5:
             printf("%d² = ", num1);
             scanf(" %d", &user_ans);
-            return; 
+            return user_ans; 
     }
-    user_ans = calc();
+    return calc(num1, num2);
 }
