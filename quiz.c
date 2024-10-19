@@ -9,7 +9,7 @@
 // function prototypes
 char operator(int operator);
 int calc(int num1, int num2);
-char input(void);
+int input(void);
 int power(int base, int exp);
 int interact(int level, int round, int num1, int num2);
 
@@ -17,7 +17,7 @@ int interact(int level, int round, int num1, int num2);
 int symbol;
 
 int main(void) {
-    int num1, num2, lvl, digits = 0, round, num_rounds, score, quiz_ans, user_ans;
+    int num1, num2, lvl = 0, digits = 0, round, num_rounds, score, quiz_ans, user_ans;
     char choice = 'R';
 
     srand((unsigned) time(NULL));
@@ -105,6 +105,7 @@ int calc(int num1, int num2) {
         case 2: case 43:    return num1 + num2;
         case 3: case 45:    return num1 - num2;
     }
+    exit(EXIT_FAILURE);
 }
 
 // calculate powers
@@ -125,12 +126,13 @@ char operator(int operator) {
         case 2: return '+';
         case 3: return '-';
     }
+    exit(EXIT_FAILURE);
 }
 
 // return user input operators to main
-char input(void) {
+int input(void) {
     
-    while (getchar() == '\n') return getchar();
+    while ((char) getchar() == '\n') return (int) getchar();
 }
 
 // Print equations and collect user input
@@ -138,7 +140,7 @@ int interact(int level, int round, int num1, int num2) {
 
     int user_ans, method = rand() % 2;
 
-    symbol = operator(symbol);
+    symbol = (int) operator(symbol);
     
     switch(level) {
         case 1: case 2:     
@@ -147,7 +149,7 @@ int interact(int level, int round, int num1, int num2) {
             return user_ans;
 
         case 3:             
-            if (method) {
+            if (method == 1) {
                 printf("\n%d.  x %c %d = %d\n", round, symbol, num2, calc(num1, num2));
                 printf("    x = ");
                 scanf(" %d", &num1);
@@ -159,7 +161,7 @@ int interact(int level, int round, int num1, int num2) {
             break;
 
         case 4: 
-            if (method) {
+            if (method == 1) {
                 printf("\n%d.  x ? %d = %d\n", round, num2, calc(num1, num2));
                 printf("    x = ");
                 scanf(" %d", &num1);
