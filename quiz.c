@@ -17,7 +17,7 @@ void interact(int round);
 int num1, num2, lvl, symbol, quiz_ans, user_ans;
 
 int main(void) {
-    int digits = 0, round, n, score, i, x;
+    int digits = 0, round, num_rounds, score;
     char choice = 'R';
 
     srand((unsigned) time(NULL));
@@ -41,11 +41,10 @@ int main(void) {
         }
 
         printf("\nEnter number of rounds: ");
-        scanf("%d", &n);
+        scanf("%d", &num_rounds);
 
-        score = 0;
         // start quiz
-        for (round = 1; round <= n; round++) {
+        for (score = 0, round = 1; round <= num_rounds; round++) {
             
             // generate random numbers and operator
             num1 = rand() % digits + 1;
@@ -56,7 +55,7 @@ int main(void) {
             if (symbol == 0) {                                                  // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
                 num2 %= 10;
             } else if (symbol == 1) {                                           // Division: Make num1 % num2 == 0
-                for (i = 0; num1 % num2 != 0 && i < 5 || num1 == 0; i++) {  
+                for (int i = 0; num1 % num2 != 0 && i < 5 || num1 == 0; i++) {  
                     num1 = (rand() % (digits - 1)) + 2;                         // If num1 = 1, in level 3 it could be that 1 / x = 0: here, x could be any number and the answer would                                                       
                     num2 = rand() % digits + 1;                                 //                                                     be correct, since we're not dealing with floats.
                     
@@ -80,7 +79,7 @@ int main(void) {
                 printf("    Incorrect, don't give up!\n");
             }
         }        
-        printf("\nYou got %d out of %d.\n", score, n);
+        printf("\nYou got %d out of %d.\n", score, num_rounds);
 
         // restart or quit
         while((choice = toupper(getchar())) != 'R' && choice != 'N') {
