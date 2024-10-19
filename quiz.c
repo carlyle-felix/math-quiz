@@ -40,12 +40,12 @@ int main(void) {
         for (round = 0; round < n; round++) {
             num1 = rand() % digits + 1;
             num2 = rand() % digits + 1;
-            sym = rand() % 4;
+            sym = rand() % 4;           // generate random operator
                     
             // operator specifics  
-            if (sym == 0) {                                                                         // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
+            if (sym == 0) {                                         // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
                 num2 %= 10;
-            } else if (sym == 1) {                                                                   // Division: Make num1 % num2 == 0
+            } else if (sym == 1) {                                  // Division: Make num1 % num2 == 0
                 for (i = 0; num1 % num2 != 0 && i < 5; i++) {
                     num1 = rand() % digits + 1;
                     num2 = rand() % digits + 1;
@@ -103,7 +103,7 @@ int main(void) {
                     break;
 
                 case 5: 
-                    quiz_ans = power(num1, 2);                                                              // Only use ^2 for now (Author is aware of a pow() function available in math.h)
+                    quiz_ans = power(num1, 2);              // Only use ^2 for now (Author is aware of a pow() function available in math.h)
                     printf("%d² = ", num1);
                     scanf("%d", &user_ans);
                     break; 
@@ -118,6 +118,7 @@ int main(void) {
         }        
         printf("\nYou got %d out of %d.\n", score, n);
 
+        // restart or quit
         while((choice = toupper(getchar())) != 'Y') {
 
             if (choice == 'N') {
@@ -130,7 +131,8 @@ int main(void) {
     return 0;
 }
 
-int calc(int num1, int num2, int operator) {                                                    // ASCII conversions
+ // caclucate answers, use ASCII conversions when operator was given by user
+int calc(int num1, int num2, int operator) {                                                   
 
     switch (operator) {
         case 0: case 42:    return num1 * num2;
@@ -140,6 +142,7 @@ int calc(int num1, int num2, int operator) {                                    
     }
 }
 
+// calculate powers
 int power(int base, int exp) {
 
     if (base == 0) {
@@ -151,6 +154,7 @@ int power(int base, int exp) {
     return base * power(base, exp - 1);
 }
 
+// return operator from random number provided by main
 char operator(int operator) {
 
     switch (operator) {
@@ -161,6 +165,7 @@ char operator(int operator) {
     }
 }
 
+// return user input operators to main
 char input(void) {
     
     while (getchar() == '\n') {
