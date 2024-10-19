@@ -39,75 +39,76 @@ int main(void) {
         // start quiz
         for (round = 0; round < n; round++) {
             num1 = rand() % digits + 1;
-            if (lvl == 5){
-                quiz_ans = power(num1, 2);                                                              // Only use ^2 for now (Author is aware of a pow() function available in math.h)
-                printf("%d² = ", num1);
-                scanf("%d", &user_ans);
-            } else {
-                sym = rand() % 4;
-                num2 = rand() % digits + 1;
-                
-                // operator specifics  
-                if (sym == 0) {                                                                         // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
-                    num2 %= 10;
-                } else if (sym == 1) {                                                                   // Division: Make num1 % num2 == 0
-                    for (i = 0; num1 % num2 != 0 && i < 5; i++) {
-                        num1 = rand() % digits + 1;
-                        num2 = rand() % digits + 1;
-                        
-                        if (num1 < num2) {
-                            int temp = num1;
-                            num1 = num2;
-                            num2 = temp;
-                        }
-                    }
-                    if (num1 % num2 != 0) {
-                        round--;
-                        continue;
+            num2 = rand() % digits + 1;
+            sym = rand() % 4;
+                    
+            // operator specifics  
+            if (sym == 0) {                                                                         // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
+                num2 %= 10;
+            } else if (sym == 1) {                                                                   // Division: Make num1 % num2 == 0
+                for (i = 0; num1 % num2 != 0 && i < 5; i++) {
+                    num1 = rand() % digits + 1;
+                    num2 = rand() % digits + 1;
+                    
+                    if (num1 < num2) {
+                        int temp = num1;
+                        num1 = num2;
+                        num2 = temp;
                     }
                 }
+                if (num1 % num2 != 0) {
+                    round--;
+                    continue;
+                }
+            }
 
-                // level specifics
-                if (lvl > 2) {
-                    quiz_ans = calc(num1, num2, sym);
-                    
-                    switch (lvl) {
-                        case 3:
-                            if (rand() % 2 == 0) {
-                                printf("\n%d.  x %c %d = %d\n", round + 1, operator(sym), num2, quiz_ans);
-                                printf("    x = ");
-                                scanf("%d", &num1);
-                            } else {   
-                                printf("\n%d.  %d %c x = %d\n", round + 1, num1, operator(sym), quiz_ans);
-                                printf("    x = ");
-                                scanf("%d", &num2);
-                            }
-                            user_ans = calc(num1, num2, sym);
-                            break;
-
-                        case 4:
-                            if (rand() % 2 == 0) {
-                                printf("\n%d.  x ? %d = %d\n", round + 1, num2, quiz_ans);
-                                printf("    x = ");
-                                scanf("%d", &num1);
-                                printf("    Operator: ");
-                                sym = (int) input();
-                            } else {
-                                printf("\n%d.  %d ? x = %d\n", round + 1, num1, quiz_ans);
-                                printf("    Operator: ");
-                                sym = (int) input();
-                                printf("    x = ");
-                                scanf("%d", &num2);
-                            }
-                            user_ans = calc(num1, num2, sym);
-                            break;
-                    }       
-                } else {
+            // level specifics
+            switch (lvl) {
+                case 1: case 2:
                     printf("\n%d.  %d %c %d = ", round + 1, num1, operator(sym), num2);
                     scanf("%d", &user_ans);
                     quiz_ans = calc(num1, num2, sym);
-                }
-            }
+                    break;
+
+                case 3:
+                    quiz_ans = calc(num1, num2, sym);
+                    if (rand() % 2 == 0) {
+                        printf("\n%d.  x %c %d = %d\n", round + 1, operator(sym), num2, quiz_ans);
+                        printf("    x = ");
+                        scanf("%d", &num1);
+                    } else {   
+                        printf("\n%d.  %d %c x = %d\n", round + 1, num1, operator(sym), quiz_ans);
+                        printf("    x = ");
+                        scanf("%d", &num2);
+                    }
+                    user_ans = calc(num1, num2, sym);
+                    break;
+
+                case 4:
+                    quiz_ans = calc(num1, num2, sym);
+                    if (rand() % 2 == 0) {
+                        printf("\n%d.  x ? %d = %d\n", round + 1, num2, quiz_ans);
+                        printf("    x = ");
+                        scanf("%d", &num1);
+                        printf("    Operator: ");
+                        sym = (int) input();
+                    } else {
+                        printf("\n%d.  %d ? x = %d\n", round + 1, num1, quiz_ans);
+                        printf("    Operator: ");
+                        sym = (int) input();
+                        printf("    x = ");
+                        scanf("%d", &num2);
+                    }
+                    user_ans = calc(num1, num2, sym);
+                    break;
+
+                case 5: 
+                    quiz_ans = power(num1, 2);                                                              // Only use ^2 for now (Author is aware of a pow() function available in math.h)
+                    printf("%d² = ", num1);
+                    scanf("%d", &user_ans);
+                    break; 
+            }       
+               
             if (quiz_ans == user_ans) {
                 printf("    Correct!\n");
                 score++;
