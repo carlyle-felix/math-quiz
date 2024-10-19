@@ -40,7 +40,7 @@ int main(void) {
             return 0;
         }
 
-        printf("Enter number of rounds: ");
+        printf("\nEnter number of rounds: ");
         scanf("%d", &n);
 
         score = 0;
@@ -57,8 +57,8 @@ int main(void) {
                 num2 %= 10;
             } else if (symbol == 1) {                                           // Division: Make num1 % num2 == 0
                 for (i = 0; num1 % num2 != 0 && i < 5 || num1 == 0; i++) {  
-                    num1 = (rand() % (digits - 1)) + 2;                      // If num1 = 1, in level 3 it could be that 1 / x = 0: here, x could be any number and the answer would                                                       
-                    num2 = rand() % digits + 1;                              //                                                     be correct, since we're not dealing with floats.
+                    num1 = (rand() % (digits - 1)) + 2;                         // If num1 = 1, in level 3 it could be that 1 / x = 0: here, x could be any number and the answer would                                                       
+                    num2 = rand() % digits + 1;                                 //                                                     be correct, since we're not dealing with floats.
                     
                     if (num1 < num2) {
                         int temp = num1;
@@ -88,7 +88,7 @@ int main(void) {
             if (choice == 'Q') {
                 break;
             } else {
-                printf("\nOptions:\n\n(R)estart quiz\n(N)ext difficulty level\n(Q)uit\nSelect: ");
+                printf("\n(R)estart quiz | (N)ext difficulty level | (Q)uit\n\nSelect: ");
             }
         }
     }
@@ -149,11 +149,11 @@ void interact(int round) {
             if (method) {
                 printf("\n%d.  x %c %d = %d\n", round, symbol, num2, calc());
                 printf("    x = ");
-                scanf("%d", &num1);
+                scanf(" %d", &num1);
             } else {
                 printf("\n%d.  %d %c x = %d\n", round, num1, symbol, calc());
                 printf("    x = ");
-                scanf("%d", &num2);
+                scanf(" %d", &num2);
             }
             break;
 
@@ -161,7 +161,7 @@ void interact(int round) {
             if (method) {
                 printf("\n%d.  x ? %d = %d\n", round, num2, calc());
                 printf("    x = ");
-                scanf("%d", &num1);
+                scanf(" %d", &num1);
                 printf("    Operator: ");
                 symbol = (int) input();
             } else { 
@@ -169,13 +169,13 @@ void interact(int round) {
                 printf("    Operator: ");
                 symbol = (int) input();
                 printf("    x = ");
-                scanf("%d", &num2);
+                scanf(" %d", &num2);
             }
             break;
 
         case 5:
             printf("%d² = ", num1);
-            scanf("%d", &user_ans);
+            scanf(" %d", &user_ans);
             return; 
     }
     user_ans = calc();
