@@ -55,7 +55,8 @@ int main(void) {
             if (symbol == 0) {                                                  // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
                 num2 %= 10;
             } else if (symbol == 1) {                                           // Division: Make num1 % num2 == 0
-                for (int i = 0; num1 % num2 != 0 && i < 5 || num1 == 0; i++) {  
+                int i;
+                for (i = 0; num1 % num2 != 0 && i < 5 || num1 == 0; i++) {  
                     num1 = (rand() % (digits - 1)) + 2;                         // If num1 = 1, in level 3 it could be that 1 / x = 0: here, x could be any number and the answer would                                                       
                     num2 = rand() % digits + 1;                                 //                                                     be correct, since we're not dealing with floats.
                     
