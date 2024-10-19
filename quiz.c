@@ -14,7 +14,7 @@ int power(int base, int exp);
 void interact(int round);
 
 // externel variables
-int num1, num2, lvl, sym, quiz_ans, user_ans;
+int num1, num2, lvl, symbol, quiz_ans, user_ans;
 
 int main(void) {
     int digits = 0, round, n, score, i, x;
@@ -45,12 +45,12 @@ int main(void) {
         for (round = 1; round <= n; round++) {
             num1 = rand() % digits + 1;
             num2 = rand() % digits + 1;
-            sym = rand() % 4;                                                // generate random operator
+            symbol = rand() % 4;                                                // generate random operator
             
             // operator specifics  
-            if (sym == 0) {                                                  // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
+            if (symbol == 0) {                                                  // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
                 num2 %= 10;
-            } else if (sym == 1) {                                           // Division: Make num1 % num2 == 0
+            } else if (symbol == 1) {                                           // Division: Make num1 % num2 == 0
                 for (i = 0; num1 % num2 != 0 && i < 5 || num1 == 0; i++) {  
                     num1 = (rand() % (digits - 1)) + 2;                      // If num1 = 1, in level 3 it could be that 1 / x = 0: here, x could be any number and the answer would                                                       
                     num2 = rand() % digits + 1;                              //                                                     be correct, since we're not dealing with floats.
@@ -94,7 +94,7 @@ int main(void) {
  // caclucate answers, use ASCII conversions when operator was given by user
 int calc() {                                                   
 
-    switch (sym) {
+    switch (symbol) {
         case 0: case 42:    return num1 * num2;
         case 1: case 47:    return num1 / num2;
         case 2: case 43:    return num1 + num2;
@@ -133,21 +133,21 @@ void interact(int round) {
 
     int method = rand() % 2;
 
-    sym = operator(sym);
+    symbol = operator(symbol);
     quiz_ans = lvl < 5 ? calc() : power(num1, 2);
     switch(lvl) {
         case 1: case 2:     
-            printf("\n%d.  %d %c %d = ", round, num1, sym, num2);
+            printf("\n%d.  %d %c %d = ", round, num1, symbol, num2);
             scanf("%d", &user_ans);
             return;
 
         case 3:             
             if (method) {
-                printf("\n%d.  x %c %d = %d\n", round, sym, num2, calc());
+                printf("\n%d.  x %c %d = %d\n", round, symbol, num2, calc());
                 printf("    x = ");
                 scanf("%d", &num1);
             } else {
-                printf("\n%d.  %d %c x = %d\n", round, num1, sym, calc());
+                printf("\n%d.  %d %c x = %d\n", round, num1, symbol, calc());
                 printf("    x = ");
                 scanf("%d", &num2);
             }
@@ -159,11 +159,11 @@ void interact(int round) {
                 printf("    x = ");
                 scanf("%d", &num1);
                 printf("    Operator: ");
-                sym = (int) input();
+                symbol = (int) input();
             } else { 
                 printf("\n%d.  %d ? x = %d\n", round, num1, calc());
                 printf("    Operator: ");
-                sym = (int) input();
+                symbol = (int) input();
                 printf("    x = ");
                 scanf("%d", &num2);
             }
