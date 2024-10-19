@@ -97,7 +97,7 @@ int main(void) {
 }
 
  // caclucate answers, use ASCII conversions when operator was given by user
-int calc(int num1, int num2) {                                                   
+int calc(int num1, int num2) {    
 
     switch (symbol) {
         case 0: case 42:    return num1 * num2;
@@ -131,8 +131,16 @@ char operator(int operator) {
 
 // return user input operators to main
 int input(void) {
-    
-    while ((char) getchar() == '\n') return (int) getchar();
+    char ch;
+
+    while ((ch = (char) getchar()) != '*' && ch != '/' && ch != '+' && ch != '-') {
+            if (ch == '\n' || ch == ' ')
+                continue;
+            else
+                printf("    Invalid operator, try again: ");
+            
+    }    
+    return (int) ch;
 }
 
 // Print equations and collect user input
