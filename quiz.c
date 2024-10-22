@@ -17,23 +17,23 @@ int interact(int level, int round, int num1, int num2);
 int symbol;
 
 int main(void) {
-    int num1, num2, lvl = 0, digits = 0, round, num_rounds, score, quiz_ans, user_ans;
+    int num1, num2, level = 0, digits = 0, round, num_rounds, score, quiz_ans, user_ans;
     char choice = 'R';
 
     srand((unsigned) time(NULL));
 
     while(choice == 'R' || choice == 'N') {
         
-        if (choice == 'N') lvl += 1;
+        if (choice == 'N') level += 1;
         else {
             printf("\ndifficulty:\n(1) Operands < 10\n(2) Operands < 100\n(3) One operand is x and operands < 10\n(4) One operator is x, operand unkown and operands < 100\n(5) Squares, base < 10\nSelect:  ");
-            scanf("%d", &lvl);
+            scanf("%d", &level);
         }
         
         // difficulty digits 
-        if (lvl == 1 || lvl == 3 || lvl == 5) {                             // Numbers should never be zero, add 1 when calling rand()
+        if (level == 1 || level == 3 || level == 5) {                             // Numbers should never be zero, add 1 when calling rand()
             digits = 8;
-        } else if (lvl == 2 || lvl == 4) {
+        } else if (level == 2 || level == 4) {
             digits = 98;
         } else {
             printf("We're not there yet!\n");
@@ -72,8 +72,8 @@ int main(void) {
                 }
             }
 
-            quiz_ans = lvl < 5 ? calc(num1, num2) : power(num1, 2);
-            user_ans = interact(lvl, round, num1, num2);       
+            quiz_ans = level < 5 ? calc(num1, num2) : power(num1, 2);
+            user_ans = interact(level, round, num1, num2);       
             if (quiz_ans == user_ans) {
                 printf("    Correct!\n");
                 score++;
