@@ -14,6 +14,3 @@ In multiplication:
 In division:
 - the answer will always be an integer.
 - the first operand will always be greater than 1. Without this, here's a scenario in level 3 where the equation is `1 / x = 0`, in this scenario, *x* could be any integer greater than 1 and the answer for *x* would be correct because the program doesn't use floats.
-
-
-This was written with the basics I've learned in C to date.
