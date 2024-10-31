@@ -1,6 +1,3 @@
-// Author: Carlyle Felix
-// This math quiz was written with the basics I've learned to date.
-
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
