@@ -3,14 +3,14 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "interact.h"
+#include "operator.h"
 
-// externel variables
-int symbol;
+enum operator_symbol symbol;
 
 int main(void) {
     int num1, num2, level = 0, digits = 0, round, num_rounds, score, quiz_ans, user_ans;
     char choice = 'R';
-
+    
     srand((unsigned) time(NULL));
 
     while(choice == 'R' || choice == 'N') {
@@ -43,9 +43,9 @@ int main(void) {
             symbol = rand() % 4;                                               
             
             // operator specifics  
-            if (symbol == 0) {                                                  // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
+            if (symbol == MULTIPLY) {                                                  // Multiplication: for levels 2, 3 and 4: Make num2 a single digit
                 num2 %= 10;
-            } else if (symbol == 1) {                                           // Division: Make num1 % num2 == 0
+            } else if (symbol == DIVIDE) {                                           // Division: Make num1 % num2 == 0
                 int i;
                 for (i = 0; num1 % num2 != 0 && i < 5 || num1 == 0; i++) {  
                     num1 = (rand() % (digits - 1)) + 2;                         // If num1 = 1, in level 3 it could be that 1 / x = 0: here, x could be any number and the answer would                                                       

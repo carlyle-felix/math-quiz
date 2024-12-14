@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "interact.h"
+#include "operator.h"
 
 char operator(int operator);
 int input(void);
 
-extern int symbol;
+extern enum operator_symbol symbol;
 
 // Print equations and collect user input
 int interact(int level, int round, int num1, int num2) {
@@ -74,10 +75,10 @@ int input(void) {
 char operator(int operator) {
 
     switch (operator) {
-        case 0: return '*';
-        case 1: return '/';
-        case 2: return '+';
-        case 3: return '-';
+        case MULTIPLY: return '*';
+        case DIVIDE: return '/';
+        case ADD: return '+';
+        case SUBTRACT: return '-';
     }
     exit(EXIT_FAILURE);
 }
@@ -95,10 +96,10 @@ int power(int base, int exp) {
 int calc(int num1, int num2) {    
 
     switch (symbol) {
-        case 0: case 42:    return num1 * num2;
-        case 1: case 47:    return num1 / num2;
-        case 2: case 43:    return num1 + num2;
-        case 3: case 45:    return num1 - num2;
+        case MULTIPLY: case 42:     return num1 * num2;
+        case DIVIDE: case 47:       return num1 / num2;
+        case ADD: case 43:          return num1 + num2;
+        case SUBTRACT: case 45:     return num1 - num2;
     }
     exit(EXIT_FAILURE);
 }
