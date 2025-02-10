@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "interact.h"
-#include "operator.h"
 
 char operator(int operator);
 int input(void);
