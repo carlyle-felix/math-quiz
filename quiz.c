@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "interact.h"
-#include "operator.h"
 
 enum operator_symbol symbol;
 
